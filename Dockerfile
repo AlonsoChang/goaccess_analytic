@@ -1,4 +1,4 @@
-FROM node:7.7.4-slim
+FROM ruby:2.3
 
 RUN apt-get update -y && apt-get install sudo vim openssh-server git python-pip apache2 goaccess -y && apt-get clean all
 RUN pip install supervisor
