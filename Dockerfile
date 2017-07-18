@@ -2,6 +2,7 @@ FROM ruby:2.3
 
 RUN apt-get update -y && apt-get install sudo vim openssh-server git python-pip apache2 goaccess -y && apt-get clean all
 RUN pip install supervisor
+RUN gem install jekyll
 
 RUN mkdir /var/run/sshd
 RUN echo 'root:changeme' | chpasswd
