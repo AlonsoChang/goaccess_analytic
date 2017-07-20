@@ -5,7 +5,7 @@ RUN apt-get update -y && apt-get install sudo vim openssh-server git python-pip 
 
 RUN echo "deb http://deb.goaccess.io/ $(lsb_release -cs) main" >> /etc/apt/sources.list.d/goaccess.list
 RUN wget -O - http://deb.goaccess.io/gnugpg.key | sudo apt-key add -
-RUN apt-get update -y && apt-get install -y goaccess && apt-get clean all
+RUN apt-get update -y && apt-get install -y goaccess geoip-database && apt-get clean all
 
 RUN pip install supervisor
 
