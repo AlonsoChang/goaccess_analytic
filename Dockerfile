@@ -1,11 +1,13 @@
 FROM ruby:2.3
 
-RUN echo "deb http://deb.goaccess.io/ $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list.d/goaccess.list
-RUN wget -O - http://deb.goaccess.io/gnugpg.key | sudo apt-key add -
 
-RUN apt-get update -y && apt-get install sudo vim openssh-server git python-pip apache2 goaccess -y && apt-get clean all
+RUN apt-get update -y && apt-get install sudo vim openssh-server git python-pip apache2 lsb-release -y && apt-get clean all
+
+RUN echo "deb http://deb.goaccess.io/ $(lsb_release -cs) main" >> /etc/apt/sources.list.d/goaccess.list
+RUN wget -O - http://deb.goaccess.io/gnugpg.key | sudo apt-key add -
+RUN apt-get update -y && apt-get install -y goaccess && apt-get clean all
+
 RUN pip install supervisor
-RUN gem install jekyll
 
 RUN mkdir /var/run/sshd
 RUN echo 'root:changeme' | chpasswd
